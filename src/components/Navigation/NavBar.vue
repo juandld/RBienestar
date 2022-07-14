@@ -1,6 +1,6 @@
 <script>
 import NavBarLink from './NavBarLink.vue'
-import { collapsed, toggleSidebar, sidebarHeight } from './state'
+import { collapsed, toggleSidebar, sidebarHeight } from './NavBarState'
 
 export default {
   props: {},
@@ -13,25 +13,25 @@ export default {
 
 <template>
   <div class="sidebar" :style="{ height: sidebarHeight }">
-    <h1>
-      <div v-if="collapsed">
-        <img src="src\assets\logo.svg" alt="Relax y Bienestar logo">
-      </div>
-      <div v-else>Bienestar y Relax</div>
-    </h1>
-    
-    <nav v-if="!collapsed">
-      <NavBarLink to="/" icon="fas fa-home">Home</NavBarLink>
-      <NavBarLink to="/analytics" icon="fas fa-chart-bar">Analytics</NavBarLink>
-    </nav>
-    
+    <div class="navLogo">
+      <img src="src\assets\logo.svg" alt="Relax y Bienestar logo">
+    </div>
     <span
       class="collapse-icon"
       :class="{ 'rotate-180': collapsed }"
       @click="toggleSidebar"
     >
       <i class="fas fa-bars" />
-    </span>
+    </span>  
+    <nav v-if="!collapsed">
+      <NavBarLink to="/" icon="fas fa-home">Home</NavBarLink>
+      <NavBarLink to="/analytics" icon="fas fa-chart-bar">BLOG</NavBarLink>
+      <NavBarLink to="/analytics" icon="fas fa-chart-bar">PRODUCTOS</NavBarLink>
+      <NavBarLink to="/analytics" icon="fas fa-chart-bar">CURSOS</NavBarLink>
+      <NavBarLink to="/analytics" icon="fas fa-chart-bar">LIBROS</NavBarLink>
+      <NavBarLink to="/analytics" icon="fas fa-chart-bar">CATEGORIAS</NavBarLink>
+      <NavBarLink to="/analytics" icon="fas fa-chart-bar">CONTACTO</NavBarLink>
+    </nav>
   </div>
 </template>
 
@@ -44,6 +44,11 @@ export default {
 </style>
 
 <style scoped>
+img {
+  margin: 10%;
+  max-width: 200px;
+}
+
 .sidebar {
   color: rgb(8, 139, 25);
   background-color: var(--sidebar-bg-color);
@@ -60,25 +65,21 @@ export default {
   transition: 0.3s ease;
 
   display: flex;
-}
+  justify-content: space-between;
+  align-items: center;
 
-.sidebar h1 {
-  height: 2.5em;
 }
 
 .collapse-icon {
-  position: absolute;
-  bottom: 0;
-  right: 0;
   padding: 0.75em;
-
   color: rgba(0, 0, 0, 0.7);
-
   transition: 0.2s linear;
+  font-size: 2em;
 }
 
 .rotate-180 {
   transform: rotate(180deg);
   transition: 0.2s linear;
 }
+
 </style>
